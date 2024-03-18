@@ -1,0 +1,24 @@
+{
+    "Smartphone":{
+        "Description":"Vous sert à contacter des gens",
+        "Actions":[
+            {
+                "Nom":"Appeler",
+                "Fonction":"Call()"
+            },
+            {
+                "Nom":"SMS",
+                "Fonction":"SMS()"
+            }
+        ]
+    },
+    "Pass":{
+        "Description":"Permet de rentrer dans la salle d'entrainement",
+        "Actions":[
+            {
+                "Nom":"Observer",
+                "Fonction":"print(f'Cette carte indique: pass nominatif d''accès à la salle d''entrainement.\n{personnage['Nom']}')"
+            }
+        ]
+    }
+}

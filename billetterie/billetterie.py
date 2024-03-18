@@ -31,7 +31,6 @@ Dist=0
 
 TarifsZ = [None, 210,260,300,340]
 Zone=0
-
 def clearC(sta=False):
     if os.name == 'nt':
         _ = os.system('cls')
@@ -174,11 +173,3 @@ if GDép < GArr:
     print("Prendre direction 'Fukuokakuko (Airport)'")
 else:
     print("Prendre direction 'Meinohama'")
-    
-
-
-
-
-
-
-

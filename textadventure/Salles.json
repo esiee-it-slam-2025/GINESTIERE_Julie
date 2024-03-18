@@ -1,0 +1,48 @@
+{
+    "0-H":{
+        "Nom":"Hall",
+        "Actions":[
+            {
+                "Nom":"Observer",
+                "Type":"print",
+                "Action":"Vous êtes dans le hall. En face de vous, il y a l'accueil. Des portiques d'entré se trouvent juste à côté."
+            }
+        ],
+        "Déplacements":[
+            {
+                "Nom":"Escaliers",
+                "Code":"0-E"
+            },
+            {
+                "Nom":"Salle 1A",
+                "Code":"0-1A"
+            }
+        ]
+    },
+    
+    "0-1A":{
+        "Nom":"Salle 1A",
+        "Parent":"0-H",
+        "Actions":[
+            {
+                "Nom":"Observer",
+                "Type":"print",
+                "Texte":"Vous êtes dans votre salle de classe. Des chaises et tables alignés, un tableau a crais, un pupitre bref une salle de classe quoi...."
+            },
+            {
+                "Nom":"Aller voir le prof",
+                "Type":"NOClef",
+                "Texte1":"Vous vous avancez vers votre professeur et donnez votre nom. Il vous remet un badge.\nProf - Voici ton badge pour la salle d'entraînement. Vas-y quand tu te sent prêt",
+                "Texte2":"La salle d'entraînement? Elle est au premier étage!"
+
+            }
+            
+        ],
+        "Déplacements":[
+            {
+                "Nom":"Sortir",
+                "Type":"lieux"
+            }
+        ]
+    }
+}
