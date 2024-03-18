@@ -1,0 +1,12 @@
+{
+    "Pentin": {
+        "Attaque": 10,
+        "PV": 50,
+        "Multiplicateur": 1.2,
+        "Dialogue": [
+            "Le pentin vous fonce dessus",
+            "Le pentin vous met un coup de point",
+            "Le pentin vous envoie un regard blessant"
+        ]
+    }
+}

@@ -1,17 +1,17 @@
-{"Nom":"",
-        "Actions":[
-            {
-                "Nom":"",
-                "Type":"",
-                "Texte":""
-            }
-            
-        ],
-        "Déplacements":[
-            {
-                "Nom":"",
-                "Code":"",
-                "Key":null
-            }
-        ]
+{
+    "Nom": "",
+    "Actions": [
+        {
+            "Nom": "",
+            "Type": "",
+            "Texte": ""
+        }
+    ],
+    "Deplacements": [
+        {
+            "Nom": "",
+            "Code": "",
+            "Key": null
+        }
+    ]
 }
