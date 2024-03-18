@@ -5,17 +5,19 @@
             {
                 "Nom":"Observer",
                 "Type":"print",
-                "Action":"Vous êtes dans le hall. En face de vous, il y a l'accueil. Des portiques d'entré se trouvent juste à côté."
+                "Texte":"Vous êtes dans le hall.\nEn face de vous, il y a l'accueil. Des portiques d'entré se trouvent juste à côté."
             }
         ],
         "Déplacements":[
             {
                 "Nom":"Escaliers",
-                "Code":"0-E"
+                "Code":"E",
+                "Key":null
             },
             {
                 "Nom":"Salle 1A",
-                "Code":"0-1A"
+                "Code":"0-1A",
+                "Key":null
             }
         ]
     },
@@ -41,8 +43,96 @@
         "Déplacements":[
             {
                 "Nom":"Sortir",
-                "Type":"lieux"
+                "Code":"0-H",
+                "Key":null
+            }
+        ]
+    },
+    "1-C":{
+        "Nom":"Couloir du premier etage",
+        "Actions":[
+            {
+                "Nom":"Observer",
+                "Type":"print",
+                "Texte":"Vous êtes dans un long couloir. Des portes sont disposées de chaques côtés. C'est un couloir rien de spécial en fait."
+            }
+            
+        ],
+        "Déplacements":[
+            {
+                "Nom":"Escaliers",
+                "Code":"E",
+                "Key":null
+            },
+            {
+                "Nom":"Salle d'entrainement",
+                "Code":"1-En",
+                "Key":"Pass"
+            }
+        ]
+    },
+    "1-En":{
+        "Nom":"Salle d'entrainement",
+        "Actions":[
+            {
+                "Nom":"Observer",
+                "Type":"print",
+                "Texte":"Vous êtes sur un tatami. Il y a un pentin devant vous. Il semble vous suivre du regard..."
+            },
+            {
+                "Nom":"S'approcher du pentin",
+                "Type":"fight",
+                "Texte":"Le pentin vous fonce dessus"
+            }
+            
+        ],
+        "Déplacements":[
+            {
+                "Nom":"Sortir",
+                "Code":"1-C",
+                "Key":null
+            }
+        ]  
+    },
+    "2-C":{
+        "Nom":"Couloir du deuxieme etage",
+        "Parent":"0-H",
+        "Actions":[
+            {
+                "Nom":"Observer",
+                "Type":"print",
+                "Texte":"Vous êtes dans un long couloir. Des portes sont disposées de chaques côtés. C'est un couloir rien de spécial en fait."
+            }
+            
+        ],
+        "Déplacements":[
+            {
+                "Nom":"Escaliers",
+                "Code":"E",
+                "Key":null
+            }
+        ]
+    },
+    "3-C":{
+        "Nom":"Couloir du troisieme etage",
+        "Parent":"0-H",
+        "Actions":[
+            {
+                "Nom":"Observer",
+                "Type":"print",
+                "Texte":"Vous êtes dans un long couloir. Des portes sont disposées de chaques côtés. C'est un couloir rien de spécial en fait."
+            }
+            
+        ],
+        "Déplacements":[
+            {
+                "Nom":"Escaliers",
+                "Code":"E",
+                "Key":null
             }
         ]
     }
+    
+    
+
 }
