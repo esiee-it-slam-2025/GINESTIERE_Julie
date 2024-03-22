@@ -1,0 +1,26 @@
+{
+    "Ramen":{
+        "PV":50,
+        "Résistance":0,
+        "Dégats":0,
+        "Portable":false
+    },
+    "Onigiri":{
+        "PV":15,
+        "Résistance":0,
+        "Dégats":0,
+        "Portable":true
+    },
+    "Udon":{
+        "PV":40,
+        "Résistance":0,
+        "Dégats":0,
+        "Portable":false
+    },
+    "Curry":{
+        "PV":35,
+        "Résistance":0,
+        "Dégats":0,
+        "Portable":false
+    }
+}

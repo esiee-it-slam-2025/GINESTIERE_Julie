@@ -5,6 +5,8 @@ def hero(nom, lettre):
                 'Nom': nom,
                 'Classe': 'Flame',
                 'PV':90,
+                'PVM':90,
+
                 'Attaques':[
                     {
                     'Nom':'Jet de flamme',
@@ -18,6 +20,7 @@ def hero(nom, lettre):
                 'Nom': nom,
                 'Classe': 'Celeste',
                 'PV':80,
+                'PVM':80,
                 'Attaques':[
                     {
                     'Nom':'Foudre aveuglante',
@@ -31,6 +34,7 @@ def hero(nom, lettre):
                 'Nom': nom,
                 'Classe': 'Titanium',
                 'PV':100,
+                'PVM':100,
                 'Attaques':[
                     {
                     'Nom':'Seisme',
@@ -44,6 +48,7 @@ def hero(nom, lettre):
                 'Nom': nom,
                 'Classe': 'Aqua',
                 'PV':90,
+                'PVM':90,
                 'Attaques':[
                     {
                     'Nom':'Vague',

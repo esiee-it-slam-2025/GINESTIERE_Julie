@@ -1,6 +1,8 @@
 
-import os, json, time
+import os, json, time, random
 from Questionnaire import *
+from whileTrue import *
+
 
 
 OClef =None
@@ -11,6 +13,7 @@ try:
     Salles = json.load(open('Salles.json'))
     Etages = json.load(open('Etages.json'))
     Ennemis = json.load(open('Ennemis.json'))
+    Nourriture = json.load(open('Nourriture.json'))
 except:
     print('\033[1;31mLes fichiers Oclef.json & Salles.json n\'ont pas été trouvé.\nIl est conseillé de ne pas executer ce programme depuis VS code.\033[0;37m')
     quit()
@@ -20,12 +23,27 @@ Code=""
 
 personnage = hero(input('Comment t\'appelle tu?\n'), "a")#questionnaire()
 
-
-plats_stock = {"Ramen":2,"Onigiri":2,"Udon":2,"Curry":2}  # À remplir avec les plats
+plats = [
+    {
+        "Nom":"Ramen",
+        "Qt":2
+    },
+    {
+        "Nom":"Onigiri",
+        "Qt":10
+    },
+    {
+        "Nom":"Udon",
+        "Qt":2
+    },
+    {
+        "Nom":"Curry",
+        "Qt":2
+    }
+]
 
 objets_cles = ["smartphone"]
 inventaire = {}
-breakpoint()
 # ********************************************************************************
 # FONCTIONS UTILITAIRES
 # ********************************************************************************
@@ -44,13 +62,64 @@ def UTText(Text):
     clearC()
 
 def fight(Record):
-    lEnnemis = {}
+    lEnnemis = []
     for i, E in enumerate(Record):
-        lEnnemis[i] = {"Nom":E,"Attaque":Ennemis[E]["Attaque"]*Ennemis[E]["Multiplicateur"]*Record[E], "PV":Ennemis[E]["PV"]}
+        lEnnemis.append({"Nom":E,"Attaque":Ennemis[E]["Attaque"]*Ennemis[E]["Multiplicateur"]*Record[E], "PV":Ennemis[E]["PV"]})
+    tours=-1
+    select = 0
+    while personnage["PV"] > 0 | sum(Ennemis["PV"] for Ennemis in lEnnemis) > 0:
+        if tours:
+            tours = False
+            while True:
+                print("C'est votre tour")
+                print("├──[Actions]'\n|   →1. Attaquer\n│   →2. Parer\n│   →3. Inventaire\n│   →4. Fuir")
+                select = WTrue("|>",1,4)
+                match select:
+                    case 1:
+                        ERang = 0
+                        if len(lEnnemis)!=1:
+                            print("0 - Menu précedent")
+                            for i, item in enumerate(lEnnemis):
+                                print(f"{i+1} - {item['Nom']}")
+                            ERang = WTrue('|>',0,len(lEnnemis)) - 1
+                        if ERang != -1:
+                            print(f"Vous lancer {personnage['Attaques'][0]['Nom']} et lui faites {personnage['Attaques'][0]['Dégats']} de dégats")
+                            lEnnemis[ERang]["PV"] -= personnage['Attaques'][0]["Dégats"]
+                            if lEnnemis[ERang]["PV"] < 1:
+                                print(f"{lEnnemis.pop(ERang)['Nom']} est mort.")
+                                
+                            break
+        
+                            
+                            
+                    case 2:
+                        break
+                    case 3:
+                        print("0 - Menu précedent")
+                        for i, item in enumerate(inventaire):
+                            print(f"{i+1} - {item['Nom']}")
+                        IRang = WTrue('|>',0,len(inventaire)) - 1
+                        if IRang !=-1:
+                            if list(inventaire)[IRang] in Nourriture:
+                                personnage["PV"]=min(personnage["PVM"], personnage["PV"] + Nourriture[list(inventaire)[IRang]]["PV"])
+                                UTText(f"Vous manger un {plats[select-1]['Nom']}")
+                            
+                            break
 
-    while personnage["PV"] > 0 | sum((lEnnemis.values)) > 0:
-        print("")
 
+                    case 4:
+                        break
+        else:
+            if select == 4:
+                print("Vous prenez la fuite")
+                break
+            coef = 0.8 if (select == 2) else 1
+            for item in lEnnemis:
+                print(f"{Ennemis[item['Nom']]['Dialogue'][random.randint(0,2)]}")
+                print(f"-{item['Attaque']}PV")
+                personnage["PV"] -= item['Attaque'] * coef
+            tours = True
+            
 
 def Action(Record):
     match Record["Type"]:
@@ -68,12 +137,13 @@ def Action(Record):
         case "Unique":
             eval(Record["Function"])
 
+
 def Escaliers(Etage):
     print(f"Vous êtes à l'étage {Etage}")
     while True:
         try:
             Etage = int(input("Vous allez à l'étage >"))
-            if Etage > 3 | Etage < 0:
+            if (Etage > 3) | (Etage < 0):
                 raise Exception()
             return Etage
         except:
@@ -83,9 +153,36 @@ def Escaliers(Etage):
 # UNIQUE
 # ********************************************************************************
 def cantine():
-    print("Bonjour, voici les plats restants pour vous:")
-    for i, plat in enumerate(plats_stock):
-        print(f"{i+1} - {plat} (Reste {plats_stock[plat]})") if (plats_stock[plat] > 0) else False
+    while True:
+        Qt=1
+        print("Bonjour, voici les plats restants pour vous:")
+        print("0 - Partir")
+        for i, plat in enumerate(plats):
+            print(f"{i+1} - {plat['Nom']} (Reste {plat['Qt']})") if (plat['Qt'] > 0) else False
+        select = WTrue('Que voulez-vous prendre?', 0, len(plats))
+
+        if select != 0:
+            if plats[select-1]["Qt"]>0:
+                if Nourriture[plats[select-1]["Nom"]]["Portable"]:
+                    print(f"|Combien de {plats[select-1]['Nom']} voulez-vous emporter?")
+                    Qt = WTrue('|>',1,plats[select-1]["Qt"])
+                    try:
+                        inventaire[plats[select-1]['Nom']] += Qt
+                    except:
+                        inventaire[plats[select-1]['Nom']] = Qt
+                    print(f"Vous prenez {select} {plats[select-1]['Nom']}")
+                else:
+                    personnage["PV"]=min(personnage["PVM"], personnage["PV"] + Nourriture[plats[select-1]["Nom"]]["PV"])
+                    UTText(f"Vous manger un {plats[select-1]['Nom']}")
+                plats[select-1]["Qt"] -=Qt
+
+            else:
+                UTText(f"Il n'y a plus de {plats[select-1]['Nom']}")
+
+        else:
+            break
+
+
 # ********************************************************************************
 # INTRODUCTION
 # ********************************************************************************
@@ -125,14 +222,7 @@ def lieu(Code):
     for i, action in enumerate(Salles[Code]["Deplacements"]):
         print(f'│   →{i+1+act}. {action["Nom"]}')
         dep += 1
-    while True:
-        try:
-            select = int(input('│>'))
-            if select > dep | select < 0:
-                raise Exception("Valeur incorrecte")
-            break
-        except:
-            print(f"Erreur de saisie. Merci de saisir un entier entre 1 et {dep}")
+    select = WTrue('|>', 1, dep)
     if select > act:
         clearC()
         if(Salles[Code]["Deplacements"][select-1-act]["Key"] == None) | (Salles[Code]["Deplacements"][select-1-act]["Key"] in objets_cles):
