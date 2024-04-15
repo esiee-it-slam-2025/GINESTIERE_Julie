@@ -21,7 +21,7 @@ except:
 Code=""
 
 
-personnage = hero(input('Comment t\'appelle tu?\n'), "a")#questionnaire()
+personnage = hero(input('Comment t\'appelle tu?\n'), questionnaire())
 
 plats = [
     {
