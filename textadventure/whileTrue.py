@@ -7,5 +7,5 @@ def WTrue(IPText, min, max):
                     raise Exception("Valeur incorrecte")
                 break
             except:
-                print(f"Erreur de saisie. Merci de saisir un entier entre {min+1} et {max}")
+                print(f"Erreur de saisie. Merci de saisir un entier entre {min} et {max}")
     return select
