@@ -13,3 +13,12 @@ with Image.open("billet.png") as im:
 
     im.paste(qr_im, (111, 340))
     im.save('billet_with_qrcode.png')
+
+
+def QR(id):
+    qr = qrcode.QRCode(box_size=4)
+    qr.add_data(id)
+    qr.make()
+
+    return qr.make_image()
+
