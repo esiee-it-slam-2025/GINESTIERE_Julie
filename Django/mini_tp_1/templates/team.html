@@ -1,0 +1,16 @@
+<h1>Mini TP 1</h1>
+
+<h2>{{team.nickname}}</h2>
+<h3>
+    {%if team.win > 10%}
+    Les champions
+    {%else%}
+    Des gros loosers
+    {% endif %}
+</h3>
+<a href="../equipe/data/{{pays}}">datas</a>
+{% comment %} Afficher le surnom de l'équipe dans une balise de sous titre {% endcomment %}
+
+{% comment %} Afficher un message différent si l'équipe à + ou - de 10 victoires {% endcomment %}
+
+{% comment %} Construire le lien vers data avec le nom de l'équipe {% endcomment %}

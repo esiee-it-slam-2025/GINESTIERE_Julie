@@ -1,0 +1,12 @@
+<h1>Mini TP 1</h1>
+<h2>Liste des équipes</h2>
+
+<ul>
+  {% for team in teams %}
+  <li><a href="../equipe/{{team}}">{{team}}</a></li>
+  {% endfor %}
+</ul>
+{% comment %} 
+  Ici mettre une liste avec les équipes (en dur)
+  Associer un lien à chaque équipe permettant d'acceder à la page de cette équipe
+{% endcomment %}

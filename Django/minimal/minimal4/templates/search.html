@@ -1,0 +1,17 @@
+<h1>Django Minimal 4</h1>
+
+{# Ci-dessous se trouve une balise (tag) servant à commencer un if/elif/else. #}
+{# On utilise la variable "search_term", il faudra donc que cette variable existe #}
+{# au sein du contexte lors du rendu de ce template par une vue. #}
+{% if search_term %}
+<h2>
+    {# Les doubles accolades servent à afficher le contenu d'une variable #}
+    Vous avez recherché "{{ search_term }}"
+</h2>
+{% else %}
+<h2>
+    Aucune recherche en cours.
+</h2>
+{# L'indentation ne compte pas comme en Python, il faut donc souvent fermer #}
+{# des blocs que l'on a pu ouvrir : ici, on termine le if #}
+{% endif %}
