@@ -10,8 +10,8 @@
         <h1>Le site trop bieng</h1>
         <h2> {% block PName %}500 Error{% endblock PName %}</h2>
         <div id="navBar">
-            <a>Accueil</a>
-            <a>Quizz</a>
+            <a href="{% url "home" %}">Accueil</a>
+            <a href="{% url "quizz" %}">Quizz</a>
         </div>
         {% block Content %}
             <span>
