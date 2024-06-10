@@ -1,0 +1,37 @@
+{# On précise ici que ce fichier template "hérite" du fichier "_base.html" #}
+{# Attention, dans ce cas il faut TOUJOURS que la balise extends soit tout en haut du fichier #}
+{% extends "_base.html" %}
+{# On charge bien sûr les balises de l'application static #}
+{% load static %}
+
+{# On remplace le contenu du bloc "title" présent dans le template parent "_base.html" #}
+{% block title %}Accueil{% endblock %}
+
+{# Puis l'on remplace le contenu du bloc "content" présent dans le template parent "_base.html" #}
+{% block content %}
+<div class="container">
+    <h2>Page d'accueil</h2>
+    <p>Bienvenue sur notre site web.</p>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card">
+                {# On utilise donc la base "static" suivi du nom du fichier statique auquel on veut faire référence #}
+                <img src="{% static "osaka.jpg" %}" class="card-img-top" alt="Panneau de gare d'Osaka">
+                <div class="card-body">
+                    <h5 class="card-title">Panneau de gare d'Osaka</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                {# Mais il est aussi possible d'y passer une variable du contexte, ci-dessous "image_right" #}
+                <img src="{% static image_right %}" class="card-img-top" alt="Vue sur la tour Tsutenkaku">
+                <div class="card-body">
+                    <h5 class="card-title">Vue sur la tour Tsutenkaku</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

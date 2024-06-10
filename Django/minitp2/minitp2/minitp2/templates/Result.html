@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+
+{% block Title %}Résultats{% endblock Title %}
+
+{% block PName %}Résultats{% endblock PName %}
+
+
+{% block Content %}
+{% if result.type == "False" %}
+    <div style="background-color: #FF3333">
+        <img></img>
+        <span>Mauvaise réponse!</span>
+    </div>
+    {% else %}
+    {% if result.type == "True" %}
+        <div style="background-color: #11FF11">
+            <img></img>
+            <span>Bonne réponse!</span>
+        </div>
+        {% else %}
+            <div style="background-color: #FFCC00">
+                <img></img>
+                <span>Erreur</span>
+            </div>
+    {% endif %}
+{% endif %}
+<span>{{result.message}}</span>
+{% endblock Content %}

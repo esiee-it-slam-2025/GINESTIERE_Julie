@@ -1,0 +1,22 @@
+{% load static %}
+
+
+<html>
+    <head>
+        <title>LSTB - {% block Title %}500 Error{% endblock Title %}</title>
+        <link rel="stylesheet" href="{% static "scss/Quizz.scss" %}"/>
+    </head>
+    <body>
+        <h1>Le site trop bieng</h1>
+        <h2> {% block PName %}500 Error{% endblock PName %}</h2>
+        <div id="navBar">
+            <a>Accueil</a>
+            <a>Quizz</a>
+        </div>
+        {% block Content %}
+            <span>
+                Il semblerai que la page soit vide
+            </span>
+        {% endblock Content %}
+    </body>
+</html>

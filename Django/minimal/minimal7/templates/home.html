@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Page d'accueil</h2>
+    <p>Bienvenue sur notre site web.</p>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card">
+                <img src="{% static "python.svg" %}" class="card-img-top" alt="Logo Python">
+                <div class="card-body">
+                    <h5 class="card-title">J'apprends Python 3</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <img src="{% static "django.svg" %}" class="card-img-top" alt="Logo Django">
+                <div class="card-body">
+                    <h5 class="card-title">Ce site utilise l'excellent framework Django</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <img src="{% static "wikipedia.svg" %}" class="card-img-top" alt="Logo Wikipédia">
+                <div class="card-body">
+                    <h5 class="card-title">J'aime beaucoup Wikipédia !</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

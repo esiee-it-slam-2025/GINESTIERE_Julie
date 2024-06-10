@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <style>
+        nav ul {
+            display: flex;
+            padding: 0;
+            flex-direction: row;
+            list-style: none;
+        }
+        nav a {
+            padding: 0.25rem 0.5rem;
+        }
+        nav a.active {
+            color: white;
+            background: #084298;
+        }
+        .alert {
+            background: #fff2ab;
+            border-radius: 5px;
+        }
+        </style>
+
+        <title>Accueil - Django Minimal 5</title>
+    </head>
+    <body>
+        <nav class="container">
+            <h1>Django Minimal 5</h1>
+            <ul>
+                <li>
+                    {# La balise "url" permet d'insérer à cet endroit le chemin #}
+                    {# d'une URL en utilisant son nom tel que défini dans urlpatterns #}
+                    <a href="{% url "home" %}" class="active">Accueil</a>
+                </li>
+                <li>
+                    <a href="{% url "about" %}">À propos</a>
+                </li>
+            </ul>
+        </nav>
+        <hr />
+        <div class="container">
+            <h2>{{ page_title }}</h2>
+
+            {% if message %}
+            <p class="alert">{{ message }}</p>
+            {% endif %}
+
+            {% if request.session.visites == 1 %}
+            <p>C'est votre première visite ici !</p>
+            {% else %}
+            <p>C'est votre {{ request.session.visites }}e visite sur cette page.</p>
+            {% endif %}
+
+            {# Les filtres, écrits à la suite d'une variable, permettent de #}
+            {# modifier l'affichage final de cette dernière : ici, on indique #}
+            {# le formatage souhaité pour la variable de type datetime #}
+            <p>Il est {{ heure | date:"H:i:s" }}.</p>
+
+            <p>
+                <a href="{% url "logout" %}">Cliquez ici</a> pour remettre à zéro votre session.
+            </p>
+        </div>
+    </body>
+</html>

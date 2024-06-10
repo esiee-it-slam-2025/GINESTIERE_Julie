@@ -1,0 +1,22 @@
+{% extends "_base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Formulaire de contact</h2>
+    <p>Soyez libre de nous envoyer un message à travers ce formulaire généré par Django.</p>
+    {# Sans URL sur notre form, on sous-entend qu'il faille faire une requête POST #}
+    {# sur la page actuelle #}
+    <form method="POST">
+        {# La variable "form" contient la classe de notre formulaire, et la méthode as_p() #}
+        {# permet d'écrire d'un coup le HTML correspondant à tous les champs #}
+        {{ form.as_p }}
+        {# Mesure de protection envers la faille CSRF, ce champ caché doit toujours être #}
+        {# présent dans tout formulaire utilisé sur Django #}
+        {% csrf_token %}
+        {# Le bouton HTML qui génèrera l'envoi du formulaire #}
+        <input type="submit" class="btn btn-primary" value="Envoyer">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{# Pour utiliser les balises "static", il faut d'abord charger l'application correspondante comme ceci #}
+{% load static %}
+
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        {# Ici, la balise statique va écrire le chemin réel vers le fichier "main.css" #}
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+
+        {# Entourer un contenu dans un "bloc" permettra de le réécrire dans des templates "enfants" #}
+        {# qui utilisent ce fichier comme base. Ici, on veut permettre le fait que chaque template #}
+        {# (donc chaque page différente) puisse écrire son titre à cet endroit du HTML. #}
+        <title>{% block title %}Page sans titre{% endblock %} - Django Minimal 6</title>
+    </head>
+    <body>
+        <nav class="container">
+            <h1>Django Minimal 6</h1>
+            <ul>
+                <li>
+                    {# Le menu étant désormais commun à toutes les pages, on va utiliser la variable "request" #}
+                    {# pour récupérer le nom du motif d'URL actuel, et ajouter la classe CSS "active" si besoin #}
+                    <a href="{% url "home" %}" {% if request.resolver_match.url_name == "home" %}class="active"{% endif %}>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    {# Si le motif d'URL actuel est "about", alors on rajoute la classe CSS "active" sur le bouton "A propos" #}
+                    <a href="{% url "about" %}" {% if request.resolver_match.url_name == "about" %}class="active"{% endif %}>
+                        À propos
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        {# C'est à cet endroit du HTML que l'on laissera les templates (pages) enfants écrire leur contenu #}
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

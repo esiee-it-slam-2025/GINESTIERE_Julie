@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+
+{% block title %}Contact (Bootstrap){% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Formulaire de contact (style Bootstrap)</h2>
+    <p>Le formulaire ci-dessous affiche les champs de façon plus précise pour correspondre au style de Bootstrap.</p>
+    {# On rajoute d'abord la classe col-md-6 pour limiter la largeur à 6 colonnes (sauf en viewport mobile) #}
+    <form method="POST" class="col-md-6">
+        {# On peut boucler sur les champs du formulaire comme ceci #}
+        {% for field in form %}
+            <div class="mb-3">
+                {# On utilise ensuite les nombreux attributs du "field" #}
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }} :</label>
+                {{ field }}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Envoyer">
+    </form>
+</div>
+{% endblock %}
