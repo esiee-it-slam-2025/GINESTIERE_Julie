@@ -1,0 +1,80 @@
+{% comment %} {% with teamsSelect="<select name='team' id='team-select'>" %}
+    {% for team in teams %}
+        {% with teamsSelect=teamsSelect|add:"<option value='"|add:team.id|add:"'>"|add:team.name|add:"</option>" %}
+            
+        {% endwith %}
+        {% endfor %}
+    {% with teamsSelect=teamsSelect|add:"</select>" %}
+
+
+{% with stadiumsSelect="<select name='stadium' id='stadium-select'>"%}
+    {% for stadium in stadiums %}
+        {% stadiumsSelect|add:"<option value='"|add:stadium.id|add:"'>"|add:stadium.name|add:"</option>" %}
+            
+        
+    {% endfor %}
+
+    {% with stadiumsSelect=stadiumsSelect|add:"</select>" %} {% endcomment %}
+    
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Events</title>
+    </head>
+    <body>
+        <h1>Events</h1>
+        <div>
+        {% for event in events %}
+            
+                <strong>ID:</strong> {{ event.id }}<br>
+                <label for="start">Start:</label>
+                <input type="datetime-local" id="start" name="start" value="{{ event.start|slice:":-4" }}" /> <br>
+                <strong>Score:</strong> <input type="text" value="{{ event.score }}" /><br>
+                <strong>Winner:</strong> <select name="winner" id="winner" >
+                    {% for team in teams %}
+                        {% if team.id == event.teams.id %}
+                            <option value="{{ team.id }}" selected>{{ team.name }}</option>
+                        {% else %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select><br>
+                <strong>Stadium:</strong> <select name="stadium" id="stadium" >
+                    {% for stadium in stadiums %}
+                        {% if stadium.id == event.stadiums.id %}
+                            <option value="{{ stadium.id }}" selected>{{ stadium.name }}</option>
+                        {% else %}
+                            <option value="{{ stadium.id }}">{{ stadium.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select><br>
+                <strong>Team Home:</strong> <select name="thome" id="thome" value={{event.thome.id}} >
+                    {% for team in teams %}
+                        {% if team.id == event.teams.id %}
+                            <option value="{{ team.id }}" selected>{{ team.name }}</option>
+                        {% else %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select><br>
+                <strong>Team Away:</strong> <select name="taway" id="taway" value={{event.taway.id}} >
+                    {% for team in teams %}
+                        {% if team.id == event.teams.id %}
+                            <option value="{{ team.id }}" selected>{{ team.name }}</option>
+                        {% else %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select><br>
+                
+                {% endfor %}
+            </div>
+    
+</body>
+</html>
+{% comment %} {% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %} {% endcomment %}

@@ -1,0 +1,42 @@
+<!-- filepath: /c:/Users/win/dev/GINESTIERE_Julien/ProjetJoTicketStarter/admin/mainapp/templates/events_edit.html -->
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'adminEdit.css' %}">
+    <title>Edit Stadiums</title>
+</head>
+<body>
+    <div class="header">
+        <a href="/admin" id="backButton">
+            <button>
+                &#8592;
+            </button>
+        </a>
+        <h1>Edit Stadiums</h1>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        <div class="eventList">
+            <div class="event">
+            <p style="flex: 1; text-align: center; height: 15px;">Nom du stade</p>
+            <p style="flex: 1; text-align: center; height: 15px;">Ville</p>
+            <button style="visibility: hidden;">&#8594;</button>
+            </div>
+            {% for form in formset %}
+                {% comment %} <div style="display: grid; border: 1px solid black; padding: 10px; margin: 10px; grid-template-columns: repeat(6, 1fr);"> {% endcomment %}
+                <div class="event">
+                    {{ form.as_p }}
+                    <button type="submit">&#8594;</button>
+                </div>
+            {% endfor %}
+            </div>
+    </form>
+</body>
+</html>
