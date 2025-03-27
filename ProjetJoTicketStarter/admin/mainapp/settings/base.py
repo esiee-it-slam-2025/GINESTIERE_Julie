@@ -3,9 +3,20 @@ https://docs.djangoproject.com/fr/3.2/topics/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 # from  django.contrib.auth.models import User 
 
 # AUTH_USER_MODEL=User
+# Récupération du .env
+load_dotenv()
+
+DATABASE_HOST = os.getenv('DATABASE_HOST') or 'localhost'
+DATABASE_PORT = os.getenv('DATABASE_PORT') or 3307
+DATABASE_NAME = os.getenv('DATABASE_NAME') or 'jo_project'
+DATABASE_USER = os.getenv('DATABASE_USER') or 'root'
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD') or 'your_password'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -66,11 +77,11 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         # !!! A remplacer avec vos informations de connexion !!!
-        'NAME': "jo_project",
-        "USER": "root",
-        "PASSWORD": "your_password",
-        "HOST": "127.0.0.1",
-        "PORT": "3307",
+        'NAME': DATABASE_NAME,
+        'HOST': DATABASE_HOST,
+        'USER' : DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'PORT': DATABASE_PORT,
     }
 }
 
