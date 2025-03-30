@@ -11,7 +11,7 @@ import os
 # Récupération du .env
 load_dotenv()
 
-DATABASE_HOST = os.getenv('DATABASE_HOST') or 'localhost'
+DATABASE_HOST = os.getenv('DATABASE_HOST') or '127.0.0.1'
 DATABASE_PORT = os.getenv('DATABASE_PORT') or 3307
 DATABASE_NAME = os.getenv('DATABASE_NAME') or 'jo_project'
 DATABASE_USER = os.getenv('DATABASE_USER') or 'root'
@@ -82,6 +82,11 @@ DATABASES = {
         'USER' : DATABASE_USER,
         'PASSWORD': DATABASE_PASSWORD,
         'PORT': DATABASE_PORT,
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            # Force use of TCP connection instead of socket
+            'unix_socket': '',
+        }
     }
 }
 
