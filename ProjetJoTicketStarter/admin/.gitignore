@@ -1,0 +1,25 @@
+# Dossier de l'environnement virtuel
+venv/
+env/
+.env/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Fichiers de configuration IDE
+.vscode/
+.idea/
+
+# Fichiers de log et temporaires
+*.log
+*.pot
+
+# Fichiers de dépendances spécifiques
+.tox/
+.nox/
+.coverage
+.hypothesis/
+.pytest_cache/
+
