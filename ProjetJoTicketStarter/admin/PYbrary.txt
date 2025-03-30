@@ -1,0 +1,4 @@
+django-cors-headers
+django
+python-dotenv
+mysqlclient
