@@ -3,3 +3,9 @@ from .route import *
 from .stadiums import *
 from .teams import *
 from .events import *
+from .login import *
+from .logout import *
+from .signIn import *
+from .testSession import *
+#from .logout import *
+#from .register import *
