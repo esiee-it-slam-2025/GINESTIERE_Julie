@@ -31,6 +31,8 @@ export default function page(){
       const [serverError, setServerError] = useState<string>('');
       const [localError, setLocalError] = useState<localError>({});
       const [isLoading, setIsLoading] = useState<boolean>(false);
+      const [session, setSession] = useState<boolean | undefined>(false)
+
       const router = useRouter();
 
       const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +80,28 @@ export default function page(){
 
 
 
+      useEffect(()=>{
+        const checkSession= async () => {
+            const response = await apiGET("sessionCheck");
+            console.log("Session Status",response)
+            setSession(response.sessionValid)
+            if(response.sessionValid){
+                router.push("/")
+              }
+          }
+          checkSession()
+          
+      },[])
 
+
+    if(session == undefined){
+        return<>
+            <span>Loading ...</span>
+        </>
+    }
+    if(session){
+        return<><span>Connecté</span></>
+    }
 
 
 
