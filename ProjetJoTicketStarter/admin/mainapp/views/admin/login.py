@@ -11,6 +11,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(max_length=30, required=True, label="Nom d'utilisateur")
     password = forms.CharField(max_length=64, widget=forms.PasswordInput, required=True, label="Mot de passe")
 
+    '''
     def clean(self):
         cleaned_data = super().clean()
         username = cleaned_data.get("username")
@@ -36,6 +37,7 @@ class LoginForm(forms.Form):
             return user
         except User.DoesNotExist:
             return None
+    '''
 
 class LoginFormView(FormView):
     template_name = 'login.html'
@@ -44,7 +46,7 @@ class LoginFormView(FormView):
     def form_valid(self, form):
         Username = self.request.POST["username"]
         Password = self.request.POST["password"]
-        user = authenticate(form, username=Username, password=Password)
+        user = authenticate(form, username=Username, password=Password, is_superuser=True)
         if user is not None:
             login(self.request, user)
             # Redirect to a success page.

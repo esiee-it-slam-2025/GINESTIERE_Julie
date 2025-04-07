@@ -12,7 +12,7 @@ from django.shortcuts import redirect
 
 class AdminView(View):
     def get(self, request):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and request.user.is_superuser:
             return HttpResponse("""
             <h1>Admin</h1>
             <a href="/admin/logout/">
