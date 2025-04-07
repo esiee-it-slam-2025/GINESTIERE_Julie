@@ -1,4 +1,3 @@
-import {api} from "@/src/API/callAPI"
 import { Event } from "../interfaces/events"
 export function parseEvents({apiOutput}:{apiOutput: any[]}) : Event[]{
     apiOutput.map(
