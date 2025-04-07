@@ -69,6 +69,22 @@ export default function pages(){
                     <QRCode
                     value={ticket.uuid}
                     />
+                    <div>
+                    <span>
+                        {ticket.event.stadium.name}
+                    </span>
+                    <span className={styles.eventDate}>
+                        {new Date(ticket.event.start).getDate().toString().padStart(2, '0')}
+                        /
+                        {new Date(ticket.event.start).getMonth().toString().padStart(2, '0')}
+                        /
+                        {new Date(ticket.event.start).getFullYear()}
+                        &nbsp; à &nbsp;
+                        {new Date(ticket.event.start).getHours().toString().padStart(2, '0')}
+                        h
+                        {new Date(ticket.event.start).getMinutes().toString().padStart(2, '0')}
+                    </span>
+                    </div>
                 </div>
             )
             )}
