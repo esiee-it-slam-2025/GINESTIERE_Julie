@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "cookie": "^1.0.2",
+    "dotenv": "^16.4.7",
     "fetch-blob": "^4.0.0",
     "flag-icons": "^7.2.3",
     "next": "15.1.3",
