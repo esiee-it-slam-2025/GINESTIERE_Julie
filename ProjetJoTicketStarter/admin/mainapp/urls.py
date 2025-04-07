@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (api, validitySession, logout_view, AdminView, LoginFormView, LoginAPI, LogoutAPI, signInAPI, StadiumView, TeamView, EventView, EventsEditView, TeamsEditView, StadiumsEditView, login)
+from .views import (api, validitySession, logout_view, AdminView, LoginFormView, LoginAPI, LogoutAPI, signInAPI, StadiumView, TeamView, EventView, EventsEditView, TeamsEditView, StadiumsEditView, login, TicketsView)
 from django.shortcuts import redirect
 
 # Un exemple de endpoint qui renverait les stades... Si la vue était faite :)
@@ -11,6 +11,7 @@ urlpatterns = (
     path("api/signIn/", signInAPI.as_view(), name="apiSignIn"),
     path("api/stadiums/", StadiumView.as_view(), name="stadium"),
     path("api/teams/", TeamView.as_view(), name="team"),
+    path("api/tickets/", TicketsView.as_view(), name="tickets"),
     path("api/events/", EventView.as_view(), name="event"),
     path("api/sessionCheck/", validitySession.as_view(), name="sessionCheck"),
 

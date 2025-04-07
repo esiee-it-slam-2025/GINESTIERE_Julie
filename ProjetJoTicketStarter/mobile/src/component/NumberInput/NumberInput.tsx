@@ -10,7 +10,9 @@ const NumberInput: React.FC<NumberInputProps> = ({ className = "", value=0, ...p
     setValue(newValue); // Mettre à jour l'état avec la valeur filtrée
 };
 
-  useEffect(()=>{},[nValue])
+  useEffect(()=>{
+    setValue(value.toString())
+  },[value])
 
 
   return (
