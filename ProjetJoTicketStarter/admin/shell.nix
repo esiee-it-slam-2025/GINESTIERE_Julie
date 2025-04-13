@@ -2,22 +2,40 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    python3
-    python3Packages.pip
-    python3Packages.virtualenv
-    mysql
-    libmysqlclient
-    pkg-config
+    # Python with pip
+    (python3.withPackages(ps: with ps; [
+      pip
+      # Add other Python packages you need available globally
+    ]))
+    
+    # Other development tools you might need
+    git
   ];
 
+  # Environment variables and setup
   shellHook = ''
-    # Création et activation de l'environnement virtuel
-    if [ ! -d ".venv" ]; then
-      python3 -m venv .venv
-    fi
-    source .venv/bin/activate
+    echo "Python development environment activated"
     
-    # Installation des dépendances
-    pip install -r PYbrary.txt
+    # Create a virtualenv if it doesn't exist
+    if [ ! -d "venv" ]; then
+      python -m venv venv
+      echo "Created new virtual environment in ./venv"
+    fi
+    
+    # Activate the virtualenv
+    source venv/bin/activate
+    
+    # Set up pip to install packages locally
+    export PIP_PREFIX="$(pwd)/_build/pip_packages"
+    export PYTHONPATH="$PIP_PREFIX/${pkgs.python3.sitePackages}:$PYTHONPATH"
+    export PATH="$PIP_PREFIX/bin:$PATH"
+    
+    # Install packages from PYBrary.txt if it exists
+    if [ -f "PYbrary.txt" ]; then
+      echo "Installing packages from PYBrary.txt..."
+      pip install -r PYbrary.txt
+    else
+      echo "Warning: PYbrary.txt file not found"
+    fi
   '';
 }
