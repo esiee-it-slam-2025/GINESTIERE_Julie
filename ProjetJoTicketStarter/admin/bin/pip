@@ -1,4 +1,4 @@
-#!/home/julie/dev/GINESTIERE_Julien/ProjetJoTicketStarter/admin/bin/python
+#!
 # -*- coding: utf-8 -*-
 import re
 import sys
