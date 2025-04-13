@@ -8,5 +8,5 @@ from .logout import *
 from .signIn import *
 from .testSession import *
 from .tickets import *
-#from .logout import *
-#from .register import *
+from .checkTicket import *
+from .csrf import *
