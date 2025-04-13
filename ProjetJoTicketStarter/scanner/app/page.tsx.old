@@ -1,0 +1,71 @@
+"use client"
+import {GET as apiGET, POST as apiPOST} from "@/src/API/callAPI";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { parseEvents } from "@/src/API/parseAPI";
+import { Event } from "@/src/interfaces/events";
+import Link from 'next/link';
+
+
+
+
+
+const QRScanPage: React.FC = () => {
+
+
+  const [data, setData] = useState<Event[]>([]);
+
+
+  useEffect( () => {
+
+  const fetchTeams  = async () => {
+    const response = await apiGET("events");
+    const eventList : Event[] = parseEvents({apiOutput: response})
+    if(eventList) {
+      eventList.sort((a, b) => {
+        if (a.start > b.start) {
+            return 1;
+        }
+    
+        if (a.start < b.start) {
+            return -1;
+        }
+    
+        return 0;
+      });
+      setData(eventList);
+      console.log(eventList);
+    }
+  };
+  fetchTeams();
+},[])
+
+
+  return (
+    <div>
+      <h1>QR Code Scanner</h1>
+      {data.map((event) =>
+      (
+        <Link href={"./event?id="+event.id}>
+          <div key={event.id}>
+            <span>
+              {event.stadium.name} le&nbsp;
+            </span>
+            <span>
+              {new Date(event.start).getDate().toString().padStart(2, '0')}
+              /
+              {new Date(event.start).getMonth().toString().padStart(2, '0')}
+              /
+              {new Date(event.start).getFullYear()}
+              &nbsp; à &nbsp;
+              {new Date(event.start).getHours().toString().padStart(2, '0')}
+              h
+              {new Date(event.start).getMinutes().toString().padStart(2, '0')}
+            </span>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+export default QRScanPage;
